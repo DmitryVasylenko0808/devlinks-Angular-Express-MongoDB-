@@ -1,0 +1,148 @@
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()" class="form auth-form">
+  <label for="login" class="form-label">Login*</label>
+  <input
+    class="form-input"
+    id="login"
+    formControlName="login"
+    [class.invalid]="(formModel.hasError('required', 'login')
+                    || formModel.hasError('minlength', 'login'))
+                    && formModel.get('login')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('required', 'login') && formModel.get('login')?.touched"
+    class="form__helper-text"
+  >
+    The login is required
+  </span>
+  <span
+    *ngIf="formModel.hasError('minlength', 'login') && formModel.get('login')?.touched"
+    class="form__helper-text"
+  >
+    The login must have more than 2 characters
+  </span>
+
+  <div class="form__box _col _col0" formGroupName="passwords">
+    <label for="password" class="form-label">Password*</label>
+    <input
+      class="form-input"
+      type="password"
+      id="password"
+      formControlName="password"
+      [class.invalid]="(formModel.hasError('required', 'passwords.password')
+                      || formModel.hasError('minlength', 'passwords.password')
+                      || formModel.hasError('equal', 'passwords'))
+                      && formModel.get('passwords.password')?.touched"
+    >
+    <span
+      *ngIf="formModel.hasError('required', 'passwords.password') && formModel.get('passwords.password')?.touched"
+      class="form__helper-text"
+    >
+      The password is required
+    </span>
+    <span
+      *ngIf="formModel.hasError('minlength', 'passwords.password') && formModel.get('passwords.password')?.touched"
+      class="form__helper-text"
+    >
+      The password must have more than 7 symbols
+    </span>
+
+    <label for="repeat-password" class="form-label">Repeat Password*</label>
+    <input
+      class="form-input"
+      type="password"
+      id="repeat-password"
+      formControlName="rPassword"
+      [class.invalid]="formModel.hasError('equal', 'passwords') && formModel.get('passwords.rPassword')?.touched"
+    >
+    <span
+      *ngIf="formModel.hasError('equal', 'passwords') && formModel.get('passwords.rPassword')?.touched"
+      class="form__helper-text"
+    >
+      Passwords don't match
+    </span>
+  </div>
+
+  <label for="firstname" class="form-label">First Name*</label>
+  <input
+    class="form-input"
+    id="firstname"
+    formControlName="firstName"
+    [class.invalid]="(formModel.hasError('required', 'firstName')
+                    || formModel.hasError('minlength', 'firstName'))
+                    && formModel.get('firstName')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('required', 'firstName') && formModel.get('firstName')?.touched"
+    class="form__helper-text"
+  >
+    The first name is required
+  </span>
+
+  <label for="secondname" class="form-label">Second Name*</label>
+  <input
+    class="form-input"
+    id="secondname"
+    formControlName="secondName"
+    [class.invalid]="(formModel.hasError('required', 'secondName')
+                    || formModel.hasError('minlength', 'secondName'))
+                    && formModel.get('secondName')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('required', 'secondName') && formModel.get('secondName')?.touched"
+    class="form__helper-text"
+  >
+    The second name is required
+  </span>
+
+  <label for="email" class="form-label">Email</label>
+  <input
+    class="form-input"
+    id="email"
+    formControlName="email"
+    [class.invalid]="formModel.hasError('email', 'email') && formModel.get('email')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('email', 'email') && formModel.get('email')?.touched"
+    class="form__helper-text"
+  >
+    Invalid email
+  </span>
+
+  <label for="avatar" class="form-label">Avatar</label>
+  <label
+    class="form-file"
+    [class.invalid]="formModel.hasError('type', 'avatar') && formModel.get('avatar')?.touched"
+  >
+    <img src="assets/fileimage.svg">
+    <span *ngIf="!imageFile; else filename">Upload a File</span>
+    <ng-template #filename>
+      <span *ngIf="imageFile">{{ imageFile.name }}</span>
+    </ng-template>
+    <input
+      type="file"
+      class="form-input form-imgfield"
+      id="avatar"
+      #input
+      (change)="onFileSelect($event)"
+      formControlName="avatar"
+    >
+  </label>
+  <span
+    *ngIf="formModel.hasError('type', 'avatar') && formModel.get('avatar')?.touched"
+    class="form__helper-text"
+  >
+    Invalid type of the file
+  </span>
+
+  <div *ngIf="imagePreview" class="form__box _center">
+      <img [src]="imagePreview" class="auth-form__preview">
+  </div>
+
+  <button
+    type="submit"
+    class="form__submit"
+    [disabled]="formModel.invalid"
+  >
+    Registration
+  </button>
+</form>

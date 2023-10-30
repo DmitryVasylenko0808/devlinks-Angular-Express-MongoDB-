@@ -1,0 +1,44 @@
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()" class="form">
+  <label for="login" class="form-label">Login</label>
+  <input
+    class="form-input"
+    id="login"
+    formControlName="login"
+    [class.invalid]="(formModel.hasError('required', 'login') || formModel.hasError('minlength', 'login')) && formModel.get('login')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('required', 'login') && formModel.get('login')?.touched"
+    class="form__helper-text"
+  >
+    The login is required
+  </span>
+  <span
+    *ngIf="formModel.hasError('minlength', 'login') && formModel.get('login')?.touched"
+    class="form__helper-text"
+  >
+    The login must have more than 2 characters
+  </span>
+
+  <label for="password" class="form-label">Password</label>
+  <input
+    class="form-input"
+    type="password"
+    id="password"
+    formControlName="password"
+    [class.invalid]="(formModel.hasError('required', 'password') || formModel.hasError('minlength', 'password')) && formModel.get('password')?.touched"
+  >
+  <span
+    *ngIf="formModel.hasError('required', 'password') && formModel.get('password')?.touched"
+    class="form__helper-text"
+  >
+    The password is required
+  </span>
+  <span
+    *ngIf="formModel.hasError('minlength', 'password') && formModel.get('password')?.touched"
+    class="form__helper-text"
+  >
+    The password must have more than 7 characters
+  </span>
+
+  <button type="submit" class="form__submit" [disabled]="formModel.invalid">Log In</button>
+</form>

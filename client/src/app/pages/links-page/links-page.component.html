@@ -1,0 +1,68 @@
+<h2 class="main-block__title">Customize your links</h2>
+<p class="main-block__desc">Add/edit/remove links below and then share all your profiles with the world!</p>
+<button class="main-block__btn" (click)="addLinkFormItem()">+ Add new link</button>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="links-form form">
+  <div formArrayName="links" class="link-list">
+    <!--!!-->
+    <div
+      class="link-item"
+      *ngFor="let l of linksFormItems.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="link-item__box">
+        <div class="link-item__desc">
+          <span class="material-symbols-outlined">list</span>
+          <span class="link-item__number">Link #{{ i + 1 }}</span>
+        </div>
+        <button type="button" class="link-item-btn" (click)="deleteLinkFormItem(i)">Remove</button>
+      </div>
+      <label for="platform" class="link-item__label form-label">Platform</label>
+      <select
+        class="link-item__control form-select"
+        id="platform"
+        formControlName="platform"
+        [class.invalid]="l.hasError('required', 'platform') && l.get('platform')?.touched"
+      >
+        <option value="GitHub">Github</option>
+        <option value="YouTube">YouTube</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Twitter">Twitter</option>
+      </select>
+      <span
+        *ngIf="l.hasError('required', 'platform') && l.get('platform')?.touched"
+        class="form__helper-text"
+      >
+        Invalid value
+      </span>
+
+      <label for="link" class="link-item__label form-label">Link</label>
+      <input
+        class="link-item__control form-input"
+        id="link"
+        formControlName="link"
+        [class.invalid]="l.hasError('required', 'link') && l.get('link')?.touched"
+      >
+      <span
+        *ngIf="l.hasError('required', 'link') && l.get('link')?.touched"
+        class="form__helper-text"
+      >
+        Invalid value
+      </span>
+    </div>
+
+    <!--<div class="link-list__nothing">
+        Links are not found
+    </div>-->
+  </div>
+  <div class="form__box _end">
+    <button
+      type="submit"
+      class="form__submit"
+      [disabled]="form.invalid"
+    >
+      Save
+    </button>
+  </div>
+</form>

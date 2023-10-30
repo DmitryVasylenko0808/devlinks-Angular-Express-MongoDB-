@@ -1,0 +1,19 @@
+<a
+  [href]="link?.link"
+  class="preview-content__link"
+  [ngClass]="{ 'github': link?.platform === 'GitHub',
+               'youtube': link?.platform === 'YouTube',
+                'linkedin': link?.platform === 'LinkedIn',
+                'twitter': link?.platform === 'Twitter',
+                'facebook': link?.platform === 'Facebook'
+              }"
+>
+  <div class="preview-content__desc">
+    <img class="preview-content__platform"
+         [src]="'assets/' + link?.platform?.toLowerCase() + '-light.svg'"
+         alt="avatarImage"
+    >
+    {{ link?.platform }}
+  </div>
+  <span class="material-symbols-outlined">arrow_forward</span>
+</a>

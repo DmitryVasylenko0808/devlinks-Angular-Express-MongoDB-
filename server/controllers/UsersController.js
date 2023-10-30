@@ -80,7 +80,7 @@ class UsersController {
 
             const { passwordHash, ...userData } = user._doc;
 
-            res.json({ success: true, ...userData });
+            res.json({ success: true, userData });
         } catch (err) {
             InternalError.error(res, err);
         }
@@ -115,7 +115,7 @@ class UsersController {
             const updatedUser = await UserModel.findById(req.userId);
 
             const { passwordHash, ...userData } = updatedUser._doc;
-            res.json({ success: true, ...userData });
+            res.json({ success: true, userData });
 
         } catch (err) {
             InternalError.error(res, err);

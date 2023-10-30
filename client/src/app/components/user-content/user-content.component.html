@@ -1,0 +1,8 @@
+<div class="preview-content" [ngClass]="{'_center _round _rel': variant === 'center'}">
+  <img class="preview-content__avatar" [src]="user?.avatarFile || 'assets/avatar.jpg'" alt="avatarImage">
+  <p class="preview-content__name">{{ user?.firstName || 'Name' }} {{ user?.secondName || 'Surname' }}</p>
+  <p class="preview-content__email">{{ user?.email || 'user@example.com' }}</p>
+  <div class="preview-content__links" *ngIf="links.length !== 0">
+    <app-link-item *ngFor="let link of links" [link]="link"></app-link-item>
+  </div>
+</div>

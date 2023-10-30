@@ -5,7 +5,7 @@ class LinksController {
         try {
             await LinksModel.deleteMany({ user_id: req.userId });
 
-            const links = req.body.links.map(link => {
+            const links= req.body.links.map(link => {
                 return new LinksModel({
                     platform: link.platform,
                     link: link.link,
@@ -15,7 +15,7 @@ class LinksController {
 
             await LinksModel.insertMany(links);
 
-            res.json({ success: true });
+            res.json({ success: true, links });
         } catch (err) {
             InternalError.error(res, err);
         }

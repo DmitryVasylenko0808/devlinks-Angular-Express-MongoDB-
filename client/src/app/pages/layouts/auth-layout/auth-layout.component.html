@@ -1,0 +1,28 @@
+<div class="color-block">
+  <div class="_container">
+    <header class="header _round">
+      <a routerLink="/" class="header-nlink _preview">Back to Editor</a>
+    </header>
+  </div>
+</div>
+
+<main class="main">
+  <div class="auth-box">
+    <div class="auth-tabs">
+      <a routerLink='login'
+         routerLinkActive="_active"
+         class="auth-tabs__item"
+      >
+        Log In
+      </a>
+      <a routerLink="register"
+         routerLinkActive="_active"
+         class="auth-tabs__item"
+      >
+        Registration
+      </a>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</main>

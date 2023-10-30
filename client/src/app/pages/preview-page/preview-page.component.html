@@ -1,0 +1,17 @@
+<div class="color-block">
+  <div class="_container">
+    <header class="header _round">
+      <a routerLink="/" class="header-nlink _preview">Back to Editor</a>
+      <button class="btn-share">Share Link</button>
+    </header>
+  </div>
+</div>
+
+<main class="main _center">
+  <app-user-content
+    variant="center"
+    [user]="user"
+    [links]="links"
+  >
+  </app-user-content>
+</main>

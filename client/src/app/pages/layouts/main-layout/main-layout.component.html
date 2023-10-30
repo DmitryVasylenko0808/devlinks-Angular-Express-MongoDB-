@@ -1,0 +1,59 @@
+<div class="_container">
+  <header class="header">
+    <a routerLink="/" class="header-logo">
+      <span class="material-symbols-outlined header-logo__image">link</span>
+      <span class="header-logo__title">
+        devlinks
+      </span>
+    </a>
+
+    <div class="header-box">
+      <a
+        routerLink="links"
+        routerLinkActive="_active"
+        class="header-nlink"
+      >
+        <span class="material-symbols-outlined header-nlink__icon">link</span>
+        Links
+      </a>
+      <a
+        routerLink="profile-details"
+        routerLinkActive="_active"
+        class="header-nlink"
+      >
+        <span class="material-symbols-outlined header-nlink__icon">account_circle</span>
+        Profile Details
+      </a>
+    </div>
+
+    <div class="header-box">
+      <a *ngIf="user === null; else logout" routerLink="auth/login" class="header-nlink _preview">Log In</a>
+      <ng-template #logout>
+          <div class="header-box">
+            <a (click)="onLogout()" class="header-nlink _preview">Log Out</a>
+            <a routerLink="preview" class="header-nlink _preview">Preview</a>
+          </div>
+      </ng-template>
+
+
+    </div>
+  </header>
+
+  <main class="main">
+    <app-phone-side>
+      <app-user-content [user]="user" [links]="links"></app-user-content>
+    </app-phone-side>
+
+    <div class="main-block">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!--<div class="dialog-window">
+      <span class="dialog-window__text">Lorem ipsum it dolor sit atem Lorem ipsum it dolor sit atem</span>
+      <div class="dialog-window__box">
+          <button class="dialog-window__cancel">Cancel</button>
+          <button class="dialog-window__confirm">Confirm</button>
+      </div>
+  </div>-->
+</div>

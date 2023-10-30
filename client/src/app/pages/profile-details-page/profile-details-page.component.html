@@ -1,0 +1,103 @@
+<h2 class="main-block__title">Profile Details</h2>
+<p class="main-block__desc">Add your details to create a personal touch to your profile.</p>
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()" class="form">
+  <!--!!-->
+  <div class="profile-container">
+    <div class="profile-box">
+      <div class="profile-box__item">
+        <label for="avatar" class="form-label">Profile Picture</label>
+        <span
+          *ngIf="this.formModel.hasError('type', 'avatar') && this.formModel.get('avatar')?.touched"
+          class="form__helper-text"
+        >
+          Invalid type of the file
+        </span>
+      </div>
+
+      <div class="profile-box _inside">
+        <label class="profile-box__avatar" [style.background-image]="'url(' + imagePreview +')'">
+          <img class="profile-box__image" src="assets/image.svg">
+          <span class="profile-box__desc">Change Image</span>
+          <input
+            type="file"
+            class="form-input form-imgfield"
+            id="avatar"
+            formControlName="avatar"
+            (change)="onFileSelect($event)"
+          >
+        </label>
+        <span class="profile-box__text">
+          Image must be below 1024x1024px.
+          <br>
+          Use PNG, JPG or BMP format.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-box">
+      <label for="firstname" class="form-label profile-box__item">First Name*</label>
+      <div class="form__box _col profile-box__item2">
+        <input
+          class="form-input"
+          id="firstname"
+          formControlName="firstName"
+          [class.invalid]="formModel.hasError('required', 'firstName') && formModel.get('firstName')?.touched"
+        >
+        <span
+          *ngIf="formModel.hasError('required', 'firstName') && formModel.get('firstName')?.touched"
+          class="form__helper-text"
+        >
+        The first name is required
+        </span>
+      </div>
+
+    </div>
+    <div class="profile-box">
+      <label for="secondname" class="form-label profile-box__item">Second Name*</label>
+      <div class="form__box _col profile-box__item2">
+        <input
+          class="form-input profile-box__item2"
+          id="secondname"
+          formControlName="secondName"
+          [class.invalid]="formModel.hasError('required', 'secondName') && formModel.get('secondName')?.touched"
+        >
+        <span
+          *ngIf="formModel.hasError('required', 'secondName') && formModel.get('secondName')?.touched"
+          class="form__helper-text"
+        >
+        The second name is required
+        </span>
+      </div>
+    </div>
+
+    <div class="profile-box">
+      <label for="email" class="form-label profile-box__item">Email</label>
+      <div class="form__box _col profile-box__item2">
+        <input
+          class="form-input profile-box__item2"
+          id="email"
+          formControlName="email"
+        >
+        <span
+          *ngIf="formModel.hasError('email', 'email') && formModel.get('email')?.touched"
+          class="form__helper-text"
+        >
+        Invalid email
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form__box _end">
+    <button
+      type="submit"
+      class="form__submit"
+      [disabled]="formModel.invalid || checkUserChanges()"
+    >
+      Save
+    </button>
+  </div>
+</form>

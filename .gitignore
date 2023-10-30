@@ -1,4 +1,5 @@
-/devlinks-scrap
 /server/node_modules
+/client/node_modules
 
+/devlinks-scrap
 users.txt
